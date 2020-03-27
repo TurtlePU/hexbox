@@ -3,13 +3,16 @@ use super::offset_pos::OffsetPos;
 //use super::direction::Direction;
 
 #[derive(Clone, Copy, Add, Sub)]
-pub struct CubicPos(i64, i64);
+pub struct CubicPos {
+    x: isize,
+    z: isize,
+}
 
 //use Direction::*;
 
 impl CubicPos {
-    pub fn x(&self) -> i64 { self.0 }
-    pub fn z(&self) -> i64 { self.1 }
+    pub fn x(&self) -> isize { self.x }
+    pub fn z(&self) -> isize { self.z }
 //    pub fn y(&self) -> i64 { -self.0 - self.1 }
 //
 //    pub fn go(&self, to: Direction) -> CubicPos {
@@ -31,6 +34,6 @@ impl CubicPos {
 impl From<OffsetPos> for CubicPos {
     fn from(offset: OffsetPos) -> CubicPos {
         let col = offset.col();
-        CubicPos(col, offset.row() - (col - col & 1) / 2)
+        CubicPos { x: col, z: offset.row() - (col - col & 1) / 2 }
     }
 }
