@@ -1,28 +1,36 @@
-use std::ops::Deref;
 use derive_more::{Add, Sub};
-use super::point::Point;
-use super::hex_pos::HexPos;
+use super::offset_pos::OffsetPos;
+//use super::direction::Direction;
 
-#[derive(Clone, Copy, Default, Add, Sub)]
-pub struct CubicPos(Point<i64>);
+#[derive(Clone, Copy, Add, Sub)]
+pub struct CubicPos(i64, i64);
+
+//use Direction::*;
 
 impl CubicPos {
-    fn new(x: i64, y: i64) -> Self { Self(Point::new(x, y)) }
-    fn up() -> Self { Self::new(0, 1) }
-    fn left() -> Self { Self::new(-1, 0) }
-    fn right() -> Self { Self::new(1, -1) }
+    pub fn x(&self) -> i64 { self.0 }
+    pub fn z(&self) -> i64 { self.1 }
+//    pub fn y(&self) -> i64 { -self.0 - self.1 }
+//
+//    pub fn go(&self, to: Direction) -> CubicPos {
+//        let d = match to {
+//            Up   => (0, -1), Right => ( 1, 0), Low  => (-1,  1),
+//            Down => (0,  1), Left  => (-1, 0), High => ( 1, -1),
+//        };
+//        *self + CubicPos(d.0, d.1)
+//    }
+//
+//    pub fn abs(&self) -> i64 {
+//        vec![self.x(), self.y(), self.z()]
+//            .into_iter()
+//            .map(|x| x.abs())
+//            .max().unwrap()
+//    }
 }
 
-impl Deref for CubicPos {
-    type Target = Point<i64>;
-    fn deref(&self) -> &Self::Target { &self.0 }
-}
-
-impl HexPos for CubicPos {
-    fn above(&self) -> Self { *self + Self::up() }
-    fn below(&self) -> Self { *self - Self::up() }
-    fn left_arm(&self) -> Self { *self - Self::right() }
-    fn right_arm(&self) -> Self { *self - Self::left() }
-    fn left(&self) -> Self { *self + Self::left() }
-    fn right(&self) -> Self { *self + Self::right() }
+impl From<OffsetPos> for CubicPos {
+    fn from(offset: OffsetPos) -> CubicPos {
+        let col = offset.col();
+        CubicPos(col, offset.row() - (col - col & 1) / 2)
+    }
 }
