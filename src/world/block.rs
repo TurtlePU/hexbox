@@ -1,4 +1,7 @@
-use crate::pos::cubic_pos::CubicPos;
+use crate::pos::CubicPos;
 use crate::entity::Entity;
 
-pub struct Block(CubicPos, Entity);
+pub struct Block {
+    pos: CubicPos,
+    entity: Entity,
+}

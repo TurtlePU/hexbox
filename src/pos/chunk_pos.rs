@@ -1,5 +1,5 @@
 use crate::world::chunk::CHUNK_SIZE;
-use super::offset_pos::OffsetPos;
+use super::OffsetPos;
 
 pub struct ChunkPos(OffsetPos);
 

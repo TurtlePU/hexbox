@@ -1,6 +1,6 @@
 use derive_more::{Add, Sub};
-use super::offset_pos::OffsetPos;
-//use super::direction::Direction;
+use super::OffsetPos;
+//use super::Direction;
 
 #[derive(Clone, Copy, Add, Sub)]
 pub struct CubicPos {

@@ -1,6 +1,5 @@
 use crate::world::chunk::CHUNK_SIZE;
-use super::chunk_pos::ChunkPos;
-use super::cubic_pos::CubicPos;
+use super::{ChunkPos, CubicPos};
 
 pub struct OffsetPos {
     row: isize,
