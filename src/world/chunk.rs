@@ -1,4 +1,4 @@
-use crate::geom::chunk_pos::ChunkPos;
+use crate::pos::chunk_pos::ChunkPos;
 use super::block::Block;
 
 pub const CHUNK_SIZE: usize = 16;

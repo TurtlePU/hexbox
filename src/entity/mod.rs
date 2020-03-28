@@ -1,1 +1,1 @@
-pub mod entity;
+pub enum Entity {}

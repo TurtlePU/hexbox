@@ -1,6 +1,6 @@
 extern crate derive_more;
 
-mod geom;
+mod pos;
 mod entity;
 mod world;
 
